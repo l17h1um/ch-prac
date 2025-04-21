@@ -33,30 +33,4 @@ INSERT INTO my_first_table (user_id, message, timestamp, metric) VALUES
 
 ```
 wget 'https://drive.google.com/uc?id=1N1xoxgcw2K3d-49tlchXAWw4wuxLj7EV&export=download' -O output.csv
-
-head -n 2 
-```
-
-```
-CREATE TABLE customer_data
-(
-    `Index` UInt32,
-    `Customer Id` String,
-    `First Name` String,
-    `Last Name` String,
-    `Company` String,
-    `City` String,
-    `Country` String,
-    `Phone 1` String,
-    `Phone 2` String,
-    `Email` String,
-    `Subscription Date` Date,
-    `Website` String
-)
-ENGINE = MergeTree()
-ORDER BY `Index`;
-```
-
-```
-clickhouse-client --query="INSERT INTO customer_data FORMAT CSVWithNames" < output.csv
 ```
