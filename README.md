@@ -4,13 +4,14 @@
 
 https://clickhouse.com/docs/ru/getting-started/quick-start
 
+unix
 ```
 curl https://clickhouse.com/ | sh
-ls
+./clickhouse install
 ./clickhouse start
 ./clickhouse client
 ```
-
+ch
 ```
 CREATE TABLE my_first_table
 (
@@ -22,7 +23,7 @@ CREATE TABLE my_first_table
 ENGINE = MergeTree
 PRIMARY KEY (user_id, timestamp)
 ```
-
+ch
 ```
 INSERT INTO my_first_table (user_id, message, timestamp, metric) VALUES
     (101, 'Hello, ClickHouse!',                                 now(),       -1.0    ),
@@ -30,7 +31,33 @@ INSERT INTO my_first_table (user_id, message, timestamp, metric) VALUES
     (102, 'Sort your data based on your commonly-used queries', today(),     2.718   ),
     (101, 'Granules are the smallest chunks of data read',      now() + 5,   3.14159 )
 ```
-
+unix
 ```
 wget 'https://drive.google.com/uc?id=1N1xoxgcw2K3d-49tlchXAWw4wuxLj7EV&export=download' -O output.csv
+
+head -n 2 
+```
+ch
+```
+CREATE TABLE customer_data
+(
+    `Index` UInt32,
+    `Customer Id` String,
+    `First Name` String,
+    `Last Name` String,
+    `Company` String,
+    `City` String,
+    `Country` String,
+    `Phone 1` String,
+    `Phone 2` String,
+    `Email` String,
+    `Subscription Date` Date,
+    `Website` String
+)
+ENGINE = MergeTree()
+ORDER BY `Index`;
+```
+unix
+```
+clickhouse-client --query="INSERT INTO customer_data FORMAT CSVWithNames" < output.csv
 ```
